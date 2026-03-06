@@ -1,0 +1,254 @@
+{
+  "dns": {
+    "queryStrategy": "UseIPv4",
+    "servers": [
+      "https://1.1.1.1/dns-query",
+      "https://8.8.8.8/dns-query",
+      {
+        "address": "77.88.8.8",
+        "domains": [
+          "geosite:category-ru",
+          "domain:ru"
+        ],
+        "expectIPs": [
+          "geoip:ru"
+        ]
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "port": 10808,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ],
+        "enabled": true
+      },
+      "tag": "socks-in"
+    }
+  ],
+  "log": {
+    "loglevel": "error"
+  },
+  "outbounds": [
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "first.keen.sbrf-cdn342.ru",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "flow": "xtls-rprx-vision",
+                "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "realitySettings": {
+          "fingerprint": "chrome",
+          "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA",
+          "serverName": "ads.x5.ru",
+          "shortId": "111111"
+        },
+        "security": "reality",
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      },
+      "tag": "srv-01"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "second.keen.sbrf-cdn342.ru",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "flow" : "xtls-rprx-vision",
+                "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "realitySettings": {
+          "fingerprint": "safari",
+          "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA",
+          "serverName": "ads.x5.ru",
+          "shortId": "111111"
+        },
+        "security": "reality",
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      },
+      "tag": "srv-02"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "gazprom1.sbrf-cdn342.ru",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "flow": "xtls-rprx-vision",
+                "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "realitySettings": {
+          "fingerprint": "chrome",
+          "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA",
+          "serverName": "ads.x5.ru",
+          "shortId": "111111"
+        },
+        "security": "reality",
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      },
+      "tag": "srv-07"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "window-one.sbrf-cdn342.ru",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "flow": "xtls-rprx-vision",
+                "id": "ff6190c0-cdcb-000a-a081-611e50ab9d4b"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "realitySettings": {
+          "fingerprint": "qq",
+          "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA",
+          "serverName": "ads.x5.ru",
+          "shortId": "111111"
+        },
+        "security": "reality",
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      },
+      "tag": "srv-game-ru"
+    },
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "window-two.sbrf-cdn342.ru",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "flow": "xtls-rprx-vision",
+                "id": "ff6190c0-cdcb-0014-a081-611e50ab9d4b"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "realitySettings": {
+          "fingerprint": "qq",
+          "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA",
+          "serverName": "api-maps.yandex.ru",
+          "shortId": "111111"
+        },
+        "security": "reality",
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      },
+      "tag": "srv-game-ee1"
+    },
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    }
+  ],
+  "routing": {
+    "balancers": [
+      {
+        "selector": [
+          "srv-"
+        ],
+        "strategy": {
+          "type": "leastPing"
+        },
+        "tag": "stable_bal"
+      }
+    ],
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "domain": [
+          "geosite:category-ru",
+          "domain:vk.com",
+          "domain:vk.ru",
+          "domain:gosuslugi.ru",
+          "domain:yandex.ru",
+          "domain:ozon.ru",
+          "domain:vtb.ru",
+          "domain:tinkoff.ru",
+          "domain:sberbank.ru",
+          "domain:wildberries.ru",
+          "domain:rutube.ru",
+          "domain:avito.ru"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "geoip:ru",
+          "geoip:private"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "balancerTag": "stable_bal",
+        "network": "tcp,udp",
+        "type": "field"
+      }
+    ]
+  }
+}
