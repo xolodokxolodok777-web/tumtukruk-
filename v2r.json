@@ -1,0 +1,49 @@
+{
+  "log": { "loglevel": "error" },
+  "dns": {
+    "servers": [
+      "https://1.1.1.1/dns-query",
+      "https://8.8.8.8/dns-query",
+      { "address": "77.88.8.8", "domains": ["geosite:category-ru", "domain:ru"], "expectIPs": ["geoip:ru"] }
+    ],
+    "queryStrategy": "UseIPv4"
+  },
+  "inbounds": [
+    {
+      "port": 10808,
+      "protocol": "socks",
+      "settings": { "auth": "noauth", "udp": true },
+      "tag": "socks-in",
+      "sniffing": { "enabled": true, "destOverride": ["http", "tls", "quic"], "metadataOnly": false }
+    }
+  ],
+  "outbounds": [
+    { "tag": "srv-01", "protocol": "vless", "settings": { "vnext": [{"address": "first.keen.sbrf-cdn342.ru", "port": 443, "users": [{"id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b", "encryption": "none", "flow": "xtls-rprx-vision"}]}] }, "streamSettings": { "network": "tcp", "security": "reality", "realitySettings": { "fingerprint": "chrome", "serverName": "ads.x5.ru", "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA", "shortId": "111111" }, "sockopt": { "tcpFastOpen": true, "mark": 255 } }, "mux": { "enabled": true, "concurrency": 8 } },
+    { "tag": "srv-02", "protocol": "vless", "settings": { "vnext": [{"address": "second.keen.sbrf-cdn342.ru", "port": 443, "users": [{"id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b", "encryption": "none", "flow": "xtls-rprx-vision"}]}] }, "streamSettings": { "network": "tcp", "security": "reality", "realitySettings": { "fingerprint": "safari", "serverName": "ads.x5.ru", "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA", "shortId": "111111" }, "sockopt": { "tcpFastOpen": true } }, "mux": { "enabled": true, "concurrency": 8 } },
+    { "tag": "srv-07", "protocol": "vless", "settings": { "vnext": [{"address": "gazprom1.sbrf-cdn342.ru", "port": 443, "users": [{"id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b", "encryption": "none", "flow": "xtls-rprx-vision"}]}] }, "streamSettings": { "network": "tcp", "security": "reality", "realitySettings": { "fingerprint": "chrome", "serverName": "ads.x5.ru", "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA", "shortId": "111111" }, "sockopt": { "tcpFastOpen": true } } },
+    { "tag": "srv-game-ru", "protocol": "vless", "settings": { "vnext": [{"address": "window-one.sbrf-cdn342.ru", "port": 443, "users": [{"id": "ff6190c0-cdcb-000a-a081-611e50ab9d4b", "encryption": "none", "flow": "xtls-rprx-vision"}]}] }, "streamSettings": { "network": "tcp", "security": "reality", "realitySettings": { "fingerprint": "qq", "serverName": "ads.x5.ru", "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA", "shortId": "111111" }, "sockopt": { "tcpFastOpen": true } } },
+    { "tag": "srv-game-ee1", "protocol": "vless", "settings": { "vnext": [{"address": "window-two.sbrf-cdn342.ru", "port": 443, "users": [{"id": "ff6190c0-cdcb-0014-a081-611e50ab9d4b", "encryption": "none", "flow": "xtls-rprx-vision"}]}] }, "streamSettings": { "network": "tcp", "security": "reality", "realitySettings": { "fingerprint": "qq", "serverName": "api-maps.yandex.ru", "publicKey": "OCRYYq4e92sQ-wWFRX6WX9pdvuFBWOqybLhpSiv3nFA", "shortId": "111111" }, "sockopt": { "tcpFastOpen": true } } },
+    { "protocol": "freedom", "tag": "direct", "settings": { "domainStrategy": "UseIPv4" } },
+    { "protocol": "blackhole", "tag": "block" }
+  ],
+  "observatory": {
+    "subjectSelector": ["srv-"],
+    "probeUrl": "https://www.google.com/generate_204",
+    "probeInterval": "30s"
+  },
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "balancers": [
+      {
+        "tag": "ultra_load",
+        "selector": ["srv-"],
+        "strategy": { "type": "leastPing" }
+      }
+    ],
+    "rules": [
+      { "type": "field", "outboundTag": "direct", "domain": ["geosite:category-ru", "domain:vk.com", "domain:vk.ru", "domain:gosuslugi.ru", "domain:yandex.ru", "domain:ozon.ru", "domain:tinkoff.ru", "domain:sberbank.ru", "domain:wildberries.ru", "domain:rutube.ru", "domain:avito.ru", "domain:24video.com", "domain:pornhub.com"] },
+      { "type": "field", "outboundTag": "direct", "ip": ["geoip:ru", "geoip:private"] },
+      { "type": "field", "balancerTag": "ultra_load", "network": "tcp,udp" }
+    ]
+  }
+}
