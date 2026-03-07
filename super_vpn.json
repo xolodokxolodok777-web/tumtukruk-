@@ -1,0 +1,509 @@
+{
+  "dns": {
+    "queryStrategy": "UseIPv4",
+    "servers": [
+      "8.8.8.8",
+      "8.8.4.4",
+      {
+        "address": "77.88.8.8",
+        "domains": [
+          "geosite:category-ru"
+        ]
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 10808,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ],
+        "enabled": true,
+        "routeOnly": false
+      },
+      "tag": "socks"
+    },
+    {
+      "listen": "127.0.0.1",
+      "port": 10809,
+      "protocol": "http",
+      "settings": {
+        "allowTransparent": false
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ],
+        "enabled": true,
+        "routeOnly": false
+      },
+      "tag": "http"
+    }
+  ],
+  "log": {
+    "access": "/private/var/mobile/Containers/Shared/AppGroup/439203E3-C2CC-4CE7-8465-F717AD3336E1/Library/Application Support/Xray/logs/access.log",
+    "dnsLog": true,
+    "loglevel": "Warning"
+  },
+  "outbounds": [
+    {
+      "tag": "super-vpn-balancer",
+      "protocol": "balancer",
+      "settings": {
+        "outbounds": [
+          {
+            "protocol": "vless",
+            "settings": {
+              "vnext": [
+                {
+                  "address": "ytn.sbrf-cdn342.ru",
+                  "port": 4241,
+                  "users": [
+                    {
+                      "encryption": "none",
+                      "flow": "xtls-rprx-vision",
+                      "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+                    }
+                  ]
+                }
+              ]
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "realitySettings": {
+                "fingerprint": "qq",
+                "publicKey": "aCT3PdJs8nghWdaozo1O--_WKfV6K97cjIMlJSnZRQY",
+                "serverName": "sun6-22.userapi.com",
+                "shortId": "111111",
+                "show": false
+              },
+              "security": "reality",
+              "tcpSettings": {}
+            },
+            "tag": "russia-youtube"
+          },
+          {
+            "protocol": "vless",
+            "settings": {
+              "vnext": [
+                {
+                  "address": "185.234.59.224",
+                  "port": 8443,
+                  "users": [
+                    {
+                      "encryption": "none",
+                      "flow": "xtls-rprx-vision",
+                      "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+                    }
+                  ]
+                }
+              ]
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "realitySettings": {
+                "fingerprint": "qq",
+                "publicKey": "ATRoFPpyxH23kPCa9dKyLTT_gQ_eAkNtVVRlvPaxBjQ",
+                "serverName": "holodos.vk.com",
+                "shortId": "111111",
+                "show": false
+              },
+              "security": "reality",
+              "tcpSettings": {}
+            },
+            "tag": "finland-most"
+          },
+          {
+            "protocol": "vless",
+            "settings": {
+              "vnext": [
+                {
+                  "address": "185.234.59.224",
+                  "port": 7443,
+                  "users": [
+                    {
+                      "encryption": "none",
+                      "flow": "xtls-rprx-vision",
+                      "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+                    }
+                  ]
+                }
+              ]
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "realitySettings": {
+                "fingerprint": "qq",
+                "publicKey": "ATRoFPpyxH23kPCa9dKyLTT_gQ_eAkNtVVRlvPaxBjQ",
+                "serverName": "holodos.vk.com",
+                "shortId": "111111",
+                "show": false
+              },
+              "security": "reality",
+              "tcpSettings": {}
+            },
+            "tag": "sweden-most"
+          },
+          {
+            "protocol": "vless",
+            "settings": {
+              "vnext": [
+                {
+                  "address": "69.12.83.19",
+                  "port": 7443,
+                  "users": [
+                    {
+                      "encryption": "none",
+                      "flow": "xtls-rprx-vision",
+                      "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+                    }
+                  ]
+                }
+              ]
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "realitySettings": {
+                "fingerprint": "qq",
+                "publicKey": "XguLRlc-hWqFhf8-KTxtCE434F6e4Hiqoc5cTBpLxnE",
+                "serverName": "tradingview.com",
+                "shortId": "111111",
+                "show": false
+              },
+              "security": "reality",
+              "tcpSettings": {}
+            },
+            "tag": "estonia-gaming"
+          },
+          {
+            "protocol": "vless",
+            "settings": {
+              "vnext": [
+                {
+                  "address": "us-api.sbrf-cdn342.ru",
+                  "port": 4241,
+                  "users": [
+                    {
+                      "encryption": "none",
+                      "flow": "xtls-rprx-vision",
+                      "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+                    }
+                  ]
+                }
+              ]
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "realitySettings": {
+                "publicKey": "-8Dc8Dm5YzxVvllu8W5Uc7N9rq27_A3McxYXArNyJQs",
+                "serverName": "dropbox.com",
+                "shortId": "0a381e1fa219",
+                "show": false
+              },
+              "security": "reality",
+              "tcpSettings": {}
+            },
+            "tag": "usa"
+          },
+          {
+            "protocol": "vless",
+            "settings": {
+              "vnext": [
+                {
+                  "address": "kz.sbrf-cdn342.ru",
+                  "port": 4241,
+                  "users": [
+                    {
+                      "encryption": "none",
+                      "flow": "xtls-rprx-vision",
+                      "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+                    }
+                  ]
+                }
+              ]
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "realitySettings": {
+                "publicKey": "-8Dc8Dm5YzxVvllu8W5Uc7N9rq27_A3McxYXArNyJQs",
+                "serverName": "dropbox.com",
+                "shortId": "0a381e1fa219",
+                "show": false
+              },
+              "security": "reality",
+              "tcpSettings": {}
+            },
+            "tag": "kazakhstan"
+          },
+          {
+            "protocol": "vless",
+            "settings": {
+              "vnext": [
+                {
+                  "address": "ru-br-2.sbrf-cdn342.ru",
+                  "port": 9443,
+                  "users": [
+                    {
+                      "encryption": "none",
+                      "flow": "xtls-rprx-vision",
+                      "id": "ff6190c0-cdcb-46cf-a081-611e50ab9d4b"
+                    }
+                  ]
+                }
+              ]
+            },
+            "streamSettings": {
+              "network": "tcp",
+              "realitySettings": {
+                "publicKey": "ATRoFPpyxH23kPCa9dKyLTT_gQ_eAkNtVVRlvPaxBjQ",
+                "serverName": "holodos.vk.com",
+                "shortId": "111111",
+                "show": false
+              },
+              "security": "reality",
+              "tcpSettings": {}
+            },
+            "tag": "uae"
+          }
+        ],
+        "strategy": "leastPing",
+        "interval": 300,
+        "tolerance": 50
+      }
+    },
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    }
+  ],
+  "remarks": "Super VPN Balancer",
+  "routing": {
+    "domainMatcher": "hybrid",
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "outboundTag": "direct",
+        "protocol": [
+          "bittorrent"
+        ],
+        "type": "field"
+      },
+      {
+        "ip": [
+          "87.240.128.0/18",
+          "95.213.0.0/17",
+          "93.186.224.0/21",
+          "185.32.248.0/22",
+          "217.20.144.0/20",
+          "5.61.16.0/21",
+          "185.16.244.0/22",
+          "185.16.148.0/22"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "domain:vk.com",
+          "domain:vk.ru",
+          "domain:id.vk.com",
+          "domain:userapi.com",
+          "domain:vk-cdn.net",
+          "domain:st.mycdn.me",
+          "domain:login.vk.com",
+          "domain:oauth.vk.ru",
+          "domain:stats.vk-portal.net",
+          "domain:vkcdnservice.com",
+          "domain:vk.me",
+          "domain:vk.cc",
+          "domain:vkpay.io",
+          "domain:vkuservideo.net",
+          "domain:vkuseraudio.net",
+          "domain:api.vk.com",
+          "domain:vkapps.com",
+          "domain:vkforms.ru",
+          "domain:vk-portal.net",
+          "domain:m.vk.com",
+          "domain:st1-19.vk.com",
+          "domain:st1-18.vk.com",
+          "domain:queuev4.vk.com",
+          "domain:sb.scorecardresearch.com",
+          "regexp:^.*\\.vk\\.com$",
+          "regexp:^.*\\.mail\\.ru$",
+          "regexp:^.*\\.ok\\.ru$",
+          "regexp:^.*\\.odnoklassniki\\.ru$",
+          "regexp:^.*\\.my\\.mail\\.ru$",
+          "regexp:^.*\\.e\\.mail\\.ru$",
+          "regexp:^.*\\.vk-portal\\.net$",
+          "domain:avatars.mds.yandex.net",
+          "regexp:^.*\\.yandex\\.net$",
+          "domain:oneme.ru",
+          "domain:max.ru",
+          "domain:sferum-dev.ru",
+          "domain:okcdn.ru",
+          "domain:vkuser.net",
+          "domain:wildberries.ru",
+          "domain:wbbasket.ru",
+          "domain:alfabank.ru",
+          "domain:alfadirect.ru",
+          "domain:myapelsin.ru",
+          "domain:apeople.site",
+          "domain:ozon.ru",
+          "domain:finance.ozon.ru",
+          "domain:o3t.ru",
+          "domain:o3team.ru",
+          "domain:ozon-dostavka.ru",
+          "domain:o3.ru",
+          "domain:ozonpartners.ru",
+          "domain:vtb.ru",
+          "domain:online.vtb.ru",
+          "domain:db.vtb.ru",
+          "domain:invest.vtb.ru",
+          "domain:gosuslugi.ru",
+          "domain:esia.gosuslugi.ru",
+          "domain:dom.gosuslugi.ru",
+          "domain:pos.gosuslugi.ru"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "domain:mtalk.google.com",
+          "domain:push.apple.com",
+          "domain:api.push.apple.com",
+          "domain:push-apple.com.akadns.net"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "domain": [
+          "yandex.ru"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "ip": [
+          "17.0.0.0/8",
+          "193.200.10.0/23",
+          "91.223.63.0/24"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "217.12.96.0/24",
+          "217.12.97.0/24",
+          "217.12.98.0/24",
+          "217.12.99.0/24",
+          "217.12.100.0/24",
+          "217.12.101.0/24",
+          "217.12.102.0/24",
+          "217.12.103.0/24",
+          "217.12.104.0/24",
+          "217.12.105.0/24",
+          "217.12.106.0/24",
+          "217.12.110.0/24"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "ip": [
+          "185.179.144.0/22",
+          "185.179.144.0/24",
+          "185.179.145.0/24",
+          "185.179.146.0/24",
+          "185.179.147.0/24",
+          "195.242.82.0/23",
+          "195.242.82.0/24",
+          "195.242.83.0/24",
+          "217.14.48.0/20",
+          "217.14.57.0/24",
+          "217.14.59.0/24",
+          "217.14.62.0/24",
+          "217.14.63.0/24"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "ip": [
+          "46.226.122.0/24",
+          "91.212.64.0/24",
+          "91.223.93.0/24",
+          "185.73.192.0/22",
+          "185.73.192.0/24",
+          "185.73.194.0/24",
+          "185.73.193.0/24",
+          "185.73.195.0/24",
+          "195.34.20.0/23"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "ip": [
+          "85.198.76.0/22",
+          "85.198.76.0/24",
+          "85.198.77.0/24",
+          "85.198.78.0/24",
+          "85.198.79.0/24",
+          "91.230.107.0/24",
+          "185.62.200.0/23",
+          "185.62.202.0/24",
+          "185.138.252.0/22",
+          "185.138.252.0/24",
+          "185.138.253.0/24",
+          "185.138.255.0/24",
+          "194.1.214.0/24",
+          "213.184.155.0/24",
+          "213.184.156.0/22",
+          "213.184.156.0/24"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "ip": [
+          "176.114.120.0/21",
+          "176.114.120.0/22",
+          "176.114.120.0/23",
+          "176.114.120.0/24",
+          "176.114.121.0/24",
+          "176.114.122.0/23",
+          "176.114.122.0/24",
+          "176.114.123.0/24",
+          "176.114.124.0/22",
+          "176.114.124.0/23",
+          "176.114.124.0/24",
+          "176.114.125.0/24",
+          "185.89.12.0/24",
+          "185.89.14.0/23",
+          "185.89.14.0/24",
+          "185.89.15.0/24"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "outboundTag": "super-vpn-balancer",
+        "ip": [
+          "geoip:private"
+        ]
+      }
+    ]
+  }
+}
